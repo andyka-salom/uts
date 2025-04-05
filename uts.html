@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Narnia - Explore the Magic</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS Variables --- */
+        :root {
+            --primary-color: #2c5d8d; /* A deeper blue */
+            --secondary-color: #d4af37; /* Gold accent */
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+            --text-color: #333;
+            --light-text: #f8f9fa;
+            --heading-font: 'Merriweather', serif;
+            --body-font: 'Lato', sans-serif;
+            --container-width: 1100px;
+            --border-radius: 5px;
+        }
+
+        /* --- Basic Reset & Setup --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: #fff; /* Changed default bg to white */
+        }
+
+        .container {
+            width: 90%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 15px; /* Add some padding */
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 1.2rem;
+            font-family: var(--heading-font);
+            font-weight: 700;
+            line-height: 1.3;
+            color: #222; /* Slightly darker headings */
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.7rem; }
+        h4 { font-size: 1.2rem; }
+
+        p {
+            margin-bottom: 1.2rem;
+            color: #555;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+        .section-bg {
+            background-color: var(--light-bg);
+        }
+
+        /* --- Utility Classes --- */
+        .text-center {
+            text-align: center;
+        }
+        .text-light {
+            color: var(--light-text) !important; /* Override other color rules */
+        }
+        .text-light p {
+             color: #ddd; /* Lighter paragraph text on dark bg */
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background-color: #1e4872; /* Darker shade of primary */
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: #fff;
+        }
+        .btn-secondary:hover {
+            background-color: #b89b2e; /* Darker shade of secondary */
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+
+        /* --- Header --- */
+        .header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .header .container { /* Target container specifically within header */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            font-family: var(--heading-font);
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        .main-nav ul {
+            display: flex;
+        }
+
+        .main-nav li {
+            margin-left: 25px;
+        }
+
+        .main-nav a {
+            color: #555;
+            font-weight: bold;
+            padding: 5px 0;
+            position: relative; /* For underline effect */
+        }
+
+        .main-nav a::after { /* Underline hover effect */
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -3px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            background-color: var(--light-bg); /* Light background for contrast */
+            padding: 60px 0;
+            text-align: left;
+        }
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px; /* Increased gap */
+        }
+        .hero-content {
+            flex: 1; /* Allow content to take available space */
+            max-width: 50%;
+        }
+        .hero-content h1 {
+             color: var(--primary-color); /* Make heading stand out */
+        }
+        .hero-visual {
+            flex: 1;
+            max-width: 45%;
+            border-radius: var(--border-radius);
+            overflow: hidden; /* Ensure image respects border radius */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .hero-visual img {
+             width: 100%;
+             height: auto;
+             object-fit: cover; /* Cover the area nicely */
+        }
+
+        /* --- Features Section --- */
+        .features-section {
+            padding: 80px 0;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .feature-item {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .feature-icon { /* Placeholder for icon */
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            /* Replace with actual icons (e.g., Font Awesome <i> tags) */
+        }
+        .feature-item h4 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        /* --- Testimonial Section --- */
+        .testimonial-section {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 60px 0;
+            text-align: center;
+        }
+        .testimonial-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .testimonial-content p {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #eee; /* Slightly lighter than default light text */
+            line-height: 1.8;
+        }
+        .testimonial-content cite {
+            display: block;
+            margin-top: 10px;
+            font-style: normal;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--secondary-color); /* Use accent color */
+        }
+
+        /* --- Call to Action (CTA) Section --- */
+        .cta-section {
+            padding: 80px 0;
+            text-align: center;
+            background-color: var(--light-bg);
+        }
+        .cta-section h2 {
+             margin-bottom: 25px;
+        }
+
+
+        /* --- Footer --- */
+        .footer {
+            padding: 50px 0 30px 0;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+        }
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer p {
+            color: #ccc; /* Lighter grey for footer text */
+            margin: 0;
+        }
+        .footer-links ul {
+            display: flex;
+        }
+        .footer-links li {
+            margin-left: 20px;
+        }
+        .footer-links a {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* --- Responsiveness --- */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .container { width: 95%; }
+            .hero-content, .hero-visual {
+                max-width: 100%;
+                flex-basis: 100%; /* Ensure they stack */
+            }
+             .hero-visual {
+                margin-top: 30px; /* Add space when stacked */
+             }
+        }
+
+        @media (max-width: 768px) {
+            .section { padding: 60px 0; }
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+
+            .header .container {
+                 flex-direction: column;
+                 gap: 10px;
+            }
+            .main-nav ul {
+                 margin-top: 10px;
+                 justify-content: center; /* Center nav items */
+            }
+             .main-nav li {
+                margin-left: 15px;
+                margin-right: 15px; /* Add right margin for spacing */
+             }
+
+            .hero-container {
+                flex-direction: column;
+                text-align: center; /* Center text when stacked */
+            }
+            .hero-content {
+                 max-width: 100%;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr; /* Stack feature items */
+            }
+
+            .footer .container {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            .footer-links ul {
+                justify-content: center;
+                 margin-top: 10px;
+            }
+             .footer-links li {
+                 margin-left: 10px;
+                 margin-right: 10px;
+             }
+        }
+
+         @media (max-width: 576px) {
+              body { font-size: 15px; } /* Adjust base font size */
+              h1 { font-size: 2rem; }
+              h2 { font-size: 1.6rem; }
+              h3 { font-size: 1.4rem; }
+              .btn {
+                   padding: 10px 20px;
+                   font-size: 0.9rem;
+              }
+              .main-nav li {
+                    margin-left: 10px;
+                    margin-right: 10px;
+              }
+         }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">Narnia</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Explore</a></li>
+                    <li><a href="#about">About</a></li> <!-- Added About Link -->
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>Step Through the Wardrobe</h1>
+                <p>Discover a land beyond your wildest dreams. Adventure awaits in the magical world of Narnia.</p>
+                <a href="#features" class="btn btn-primary">Explore Now</a>
+                <a href="#about" class="btn btn-secondary" style="margin-left: 10px;">Learn More</a> <!-- Added secondary button -->
+            </div>
+            <div class="hero-visual">
+                <!-- IMPORTANT: Replace this placeholder with your actual Narnia-themed image -->
+                <img src="https://i.pinimg.com/736x/f9/62/e6/f962e6d13e5e8ff2f161b519731a56af.jpg" alt="Magical landscape of Narnia">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section section">
+        <div class="container text-center">
+            <h2>Discover the Wonders</h2>
+            <p>From talking animals to epic battles, Narnia is full of magic and mystery.</p>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🦁</div> <!-- Placeholder icon -->
+                    <h4>Meet Noble Creatures</h4>
+                    <p>Encounter brave talking beasts, mythical beings, and the great Lion, Aslan.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🏰</div> <!-- Placeholder icon -->
+                    <h4>Explore Iconic Locations</h4>
+                    <p>Visit Cair Paravel, traverse the Lantern Waste, and witness the Stone Table.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚔️</div> <!-- Placeholder icon -->
+                    <h4>Embark on Epic Quests</h4>
+                    <p>Join the Pevensies and other heroes in their courageous adventures.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section id="about" class="testimonial-section section"> <!-- Added ID for nav -->
+        <div class="container testimonial-content">
+            <p>"Once a king or queen in Narnia, always a king or queen in Narnia. It’s a place that stays with you forever."</p>
+            <cite>- Lucy Pevensie (via C.S. Lewis)</cite> <!-- More thematic quote -->
+        </div>
+    </section>
+
+     <!-- Call to Action Section -->
+    <section id="contact" class="cta-section section section-bg"> <!-- Added ID for nav -->
+        <div class="container text-center">
+            <h2>Ready for Your Own Adventure?</h2>
+            <p>The wardrobe is open. Step inside and begin your journey today.</p>
+            <a href="#" class="btn btn-primary btn-lg">Join the Exploration</a> <!-- Larger button maybe? -->
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Narnia Project. All rights reserved. Inspired by C.S. Lewis.</p>
+            <div class="footer-links">
+                 <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
