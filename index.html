@@ -3,26 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Narnia - Explore the Magic</title>
+    <title>Narnia - Step Through the Wardrobe</title>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
-
+    <!-- Using a simple Sans-Serif Font Stack -->
     <style>
-        /* --- CSS Variables --- */
+        /* --- CSS Variables (Wireframe Based) --- */
         :root {
-            --primary-color: #2c5d8d; /* A deeper blue */
-            --secondary-color: #d4af37; /* Gold accent */
-            --light-bg: #f8f9fa;
-            --dark-bg: #343a40;
-            --text-color: #333;
-            --light-text: #f8f9fa;
-            --heading-font: 'Merriweather', serif;
-            --body-font: 'Lato', sans-serif;
+            --primary-color: #000000; /* Black */
+            --secondary-color: #ffffff; /* White */
+            --light-bg: #f8f8f8; /* Very light grey */
+            --dark-bg: #000000; /* Black */
+            --text-color: #333333; /* Dark grey text on light bg */
+            --light-text: #f0f0f0; /* Light grey text on dark bg */
+            --border-color: #dddddd; /* Light border color */
+            /* Removed --placeholder-bg as it's less needed now */
+            --body-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; /* System font stack */
             --container-width: 1100px;
-            --border-radius: 5px;
+            --border-radius: 0px; /* Square corners */
         }
 
         /* --- Basic Reset & Setup --- */
@@ -34,374 +31,237 @@
 
         body {
             font-family: var(--body-font);
-            line-height: 1.7;
+            line-height: 1.6;
             color: var(--text-color);
-            background-color: #fff; /* Changed default bg to white */
+            background-color: var(--secondary-color); /* Default white bg */
+            font-size: 16px;
         }
 
         .container {
             width: 90%;
             max-width: var(--container-width);
             margin: 0 auto;
-            padding: 0 15px; /* Add some padding */
+            padding: 0 15px;
         }
 
         a {
             text-decoration: none;
             color: var(--primary-color);
-            transition: color 0.3s ease;
+            transition: opacity 0.3s ease;
         }
         a:hover {
-            color: var(--secondary-color);
+            opacity: 0.7;
         }
 
         ul {
             list-style: none;
         }
 
-        img {
+        img { /* Basic image styling */
             max-width: 100%;
-            height: auto;
-            display: block;
+            height: auto; /* Maintain aspect ratio by default */
+            display: block; /* Remove extra space below images */
         }
+
+        /* Style for images meant to cover their container */
+        .img-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the container, cropping if needed */
+        }
+
 
         h1, h2, h3, h4 {
-            margin-bottom: 1.2rem;
-            font-family: var(--heading-font);
-            font-weight: 700;
+            margin-bottom: 1rem;
+            font-weight: 600; /* Slightly less bold than default */
             line-height: 1.3;
-            color: #222; /* Slightly darker headings */
+            color: var(--primary-color); /* Default to black */
         }
 
-        h1 { font-size: 3rem; }
-        h2 { font-size: 2.5rem; }
-        h3 { font-size: 1.7rem; }
-        h4 { font-size: 1.2rem; }
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.1rem; }
 
         p {
-            margin-bottom: 1.2rem;
-            color: #555;
+            margin-bottom: 1rem;
+            color: #555; /* Slightly lighter grey for paragraphs */
         }
 
         .section {
-            padding: 80px 0;
+            padding: 60px 0; /* Consistent padding */
+            overflow: hidden; /* Prevent potential overlap issues with absolute positioning */
         }
-        .section-bg {
-            background-color: var(--light-bg);
-        }
-
-        /* --- Utility Classes --- */
-        .text-center {
-            text-align: center;
-        }
-        .text-light {
-            color: var(--light-text) !important; /* Override other color rules */
-        }
-        .text-light p {
-             color: #ddd; /* Lighter paragraph text on dark bg */
-        }
-
-        /* --- Buttons --- */
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            text-align: center;
-            font-weight: bold;
-            font-size: 1rem;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: #fff;
-        }
-        .btn-primary:hover {
-            background-color: #1e4872; /* Darker shade of primary */
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-
-        .btn-secondary {
-            background-color: var(--secondary-color);
-            color: #fff;
-        }
-        .btn-secondary:hover {
-            background-color: #b89b2e; /* Darker shade of secondary */
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-
-
-        /* --- Header --- */
-        .header {
-            background-color: #fff;
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .header .container { /* Target container specifically within header */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            font-family: var(--heading-font);
-            color: var(--primary-color);
-            letter-spacing: 1px;
-        }
-
-        .main-nav ul {
-            display: flex;
-        }
-
-        .main-nav li {
-            margin-left: 25px;
-        }
-
-        .main-nav a {
-            color: #555;
-            font-weight: bold;
-            padding: 5px 0;
-            position: relative; /* For underline effect */
-        }
-
-        .main-nav a::after { /* Underline hover effect */
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -3px;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
-        .main-nav a:hover {
-            color: var(--primary-color);
-        }
-        .main-nav a:hover::after {
-            width: 100%;
-        }
-
-        /* --- Hero Section --- */
-        .hero-section {
-            background-color: var(--light-bg); /* Light background for contrast */
-            padding: 60px 0;
-            text-align: left;
-        }
-        .hero-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 50px; /* Increased gap */
-        }
-        .hero-content {
-            flex: 1; /* Allow content to take available space */
-            max-width: 50%;
-        }
-        .hero-content h1 {
-             color: var(--primary-color); /* Make heading stand out */
-        }
-        .hero-visual {
-            flex: 1;
-            max-width: 45%;
-            border-radius: var(--border-radius);
-            overflow: hidden; /* Ensure image respects border radius */
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        .hero-visual img {
-             width: 100%;
-             height: auto;
-             object-fit: cover; /* Cover the area nicely */
-        }
-
-        /* --- Features Section --- */
-        .features-section {
-            padding: 80px 0;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
-            gap: 30px;
-            margin-top: 40px;
-        }
-        .feature-item {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.07);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .feature-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        .feature-icon { /* Placeholder for icon */
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            /* Replace with actual icons (e.g., Font Awesome <i> tags) */
-        }
-        .feature-item h4 {
-            margin-bottom: 10px;
-            color: var(--primary-color);
-        }
-
-        /* --- Testimonial Section --- */
-        .testimonial-section {
-            background-color: var(--primary-color);
-            color: var(--light-text);
-            padding: 60px 0;
-            text-align: center;
-        }
-        .testimonial-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .testimonial-content p {
-            font-size: 1.3rem;
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            color: #eee; /* Slightly lighter than default light text */
-            line-height: 1.8;
-        }
-        .testimonial-content cite {
-            display: block;
-            margin-top: 10px;
-            font-style: normal;
-            font-size: 1rem;
-            font-weight: bold;
-            color: var(--secondary-color); /* Use accent color */
-        }
-
-        /* --- Call to Action (CTA) Section --- */
-        .cta-section {
-            padding: 80px 0;
-            text-align: center;
-            background-color: var(--light-bg);
-        }
-        .cta-section h2 {
-             margin-bottom: 25px;
-        }
-
-
-        /* --- Footer --- */
-        .footer {
-            padding: 50px 0 30px 0;
+        .section-dark {
             background-color: var(--dark-bg);
             color: var(--light-text);
         }
-        .footer .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .footer p {
-            color: #ccc; /* Lighter grey for footer text */
-            margin: 0;
-        }
-        .footer-links ul {
-            display: flex;
-        }
-        .footer-links li {
-            margin-left: 20px;
-        }
-        .footer-links a {
-            color: #ccc;
-            font-size: 0.9rem;
-        }
-        .footer-links a:hover {
+        .section-dark h1, .section-dark h2, .section-dark h3, .section-dark h4 {
             color: var(--secondary-color);
         }
+         .section-dark p {
+             color: var(--light-text);
+         }
+         .section-light {
+              background-color: var(--light-bg);
+         }
+
+
+        /* --- Utility Classes --- */
+        .text-center { text-align: center; }
+        .d-flex { display: flex; }
+        .justify-between { justify-content: space-between; }
+        .align-center { align-items: center; }
+        .gap-2 { gap: 2rem; }
+        .gap-1 { gap: 1rem; }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block; padding: 10px 25px; border: 1px solid transparent;
+            border-radius: var(--border-radius); cursor: pointer; text-align: center;
+            font-weight: 600; font-size: 0.95rem;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        .btn-dark { background-color: var(--primary-color); color: var(--secondary-color); border-color: var(--primary-color); }
+        .btn-dark:hover { opacity: 0.85; color: var(--secondary-color); }
+        .btn-outline { background-color: transparent; color: var(--text-color); border: 1px solid var(--border-color); }
+        .btn-outline:hover { background-color: var(--light-bg); border-color: #aaa; color: var(--primary-color); }
+         .btn-header { background-color: transparent; color: var(--text-color); border: 1px solid var(--border-color); padding: 8px 18px; }
+         .btn-header:hover { background-color: var(--light-bg); border-color: #aaa; color: var(--primary-color); }
+
+        /* --- Header --- */
+        .header { background-color: var(--secondary-color); padding: 15px 0; border-bottom: 1px solid var(--border-color); }
+        .header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 600; color: var(--primary-color); letter-spacing: 1px; text-transform: uppercase; }
+        .main-nav ul { display: flex; }
+        .main-nav li { margin-left: 30px; }
+        .main-nav a { color: var(--text-color); font-weight: 500; font-size: 0.9rem; padding-bottom: 5px; }
+        .main-nav a:hover { color: var(--primary-color); opacity: 1; }
+
+        /* --- Hero Section (Section 1) --- */
+        .hero-section { background-color: var(--light-bg); padding: 80px 0 60px 0; text-align: center; }
+        .hero-section h1 { margin-bottom: 0.8rem; }
+        .hero-section .subtitle { max-width: 550px; margin: 0 auto 1.5rem auto; color: #666; font-size: 1rem; }
+        .hero-image-container { /* Changed from hero-placeholder */
+             width: 80%; max-width: 700px;
+             height: 350px; /* Adjusted height for image aspect ratio */
+             margin: 2.5rem auto;
+             overflow: hidden; /* Ensure image cover respects container */
+             border: 1px solid var(--border-color); /* Keep border from wireframe */
+        }
+        .hero-quote { font-style: italic; color: #777; max-width: 600px; margin: 2rem auto 0 auto; font-size: 0.95rem; }
+        .hero-quote cite { display: block; margin-top: 0.5rem; font-style: normal; font-weight: 600; font-size: 0.9rem; }
+
+        /* --- Section 2 (Dark Background) --- */
+        .value-prop-dark { align-items: center; }
+        .value-prop-dark-content { flex-basis: 50%; padding-right: 3rem; }
+        .value-prop-dark-content ul { list-style: none; padding-left: 0; margin-top: 1rem; color: #ccc; }
+        .value-prop-dark-content li { margin-bottom: 0.7rem; padding-left: 20px; position: relative; }
+        .value-prop-dark-content li::before { content: '❄️'; position: absolute; left: 0; top: 0; font-size: 0.8em; }
+        .value-prop-dark-visuals { flex-basis: 50%; position: relative; height: 250px; }
+        /* Keep the overlap containers for positioning */
+        .overlap-image-container {
+            position: absolute;
+            width: 60%; height: 180px;
+            overflow: hidden; /* Clip the image */
+            border: 1px solid #444; /* Keep border for visibility */
+        }
+        .overlap-image-1 { top: 0; right: 20%; z-index: 1; }
+        .overlap-image-2 { top: 40px; right: 0; z-index: 0; }
+
+        /* --- Section 3 (Features Grid) --- */
+        .features-section { background-color: var(--secondary-color); text-align: center; }
+        .features-section .subtitle { max-width: 600px; margin: -0.5rem auto 2.5rem auto; color: #666; }
+        .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+        .feature-item { background-color: var(--light-bg); padding: 0; text-align: left; border: 1px solid var(--border-color); }
+        .feature-icon-container { /* Replaces feature-icon-placeholder */
+             width: 100%; height: 180px;
+             margin-bottom: 1.5rem;
+             overflow: hidden; /* Ensure image cover works */
+             background-color: var(--primary-color); /* Keep black bg behind image */
+        }
+        /* Removed .feature-icon-inner styles */
+        .feature-item-content { padding: 0 20px 20px 20px; }
+        .feature-item h4 { margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .feature-item p { font-size: 0.9rem; color: #666; margin-bottom: 0; }
+
+        /* --- Section 4 (Image Left, Text Right) --- */
+        .feature-detailed { align-items: center; background-color: var(--light-bg); }
+        .feature-detailed-visual {
+            flex-basis: 45%;
+            height: 350px; /* Maintain container height */
+            overflow: hidden; /* Ensure image cover works */
+            background-color: var(--primary-color); /* Keep black bg */
+        }
+        /* Removed styles for the inner placeholder div */
+        .feature-detailed-content { flex-basis: 55%; padding-left: 3rem; }
+        .feature-detailed-content h3 { margin-bottom: 0.8rem; }
+        .feature-detailed-content p { margin-bottom: 1.5rem; }
+
+        /* --- Section 5 (Form) --- */
+        .form-section { background-color: var(--secondary-color); text-align: center; }
+        .form-section h3 { margin-bottom: 2rem; }
+        .signup-form { max-width: 400px; margin: 0 auto; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group input[type="text"] {
+            width: 100%; padding: 12px 15px; border: 1px solid var(--border-color);
+            border-radius: var(--border-radius); font-size: 1rem; background-color: var(--secondary-color);
+        }
+        .signup-form .btn-dark { width: 100%; padding: 12px; margin-top: 0.5rem; }
+
+        /* --- Footer --- */
+        .footer { padding: 50px 0; background-color: var(--dark-bg); color: var(--light-text); text-align: center; }
+        .footer .logo { color: var(--secondary-color); margin-bottom: 1.5rem; font-size: 1.8rem; }
+        .footer-links ul { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px 30px; margin-bottom: 1.5rem; }
+        .footer-links a { color: #ccc; font-size: 0.9rem; font-weight: 500; }
+        .footer-links a:hover { color: var(--secondary-color); opacity: 1; }
+        .footer-social-placeholders { margin-bottom: 1.5rem; }
+        .circle-placeholder { display: inline-block; width: 30px; height: 30px; background-color: #555; border-radius: 50%; margin: 0 8px; }
+        .footer-copyright p { color: #aaa; font-size: 0.85rem; margin-bottom: 0; }
 
         /* --- Responsiveness --- */
         @media (max-width: 992px) {
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
+            h1 { font-size: 2.2rem; } h2 { font-size: 1.8rem; } h3 { font-size: 1.4rem; }
             .container { width: 95%; }
-            .hero-content, .hero-visual {
-                max-width: 100%;
-                flex-basis: 100%; /* Ensure they stack */
-            }
-             .hero-visual {
-                margin-top: 30px; /* Add space when stacked */
-             }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .value-prop-dark, .feature-detailed { flex-direction: column; text-align: center; }
+            .value-prop-dark-content, .feature-detailed-content { padding-right: 0; padding-left: 0; flex-basis: 100%; }
+            .value-prop-dark-visuals { margin-top: 2rem; height: 200px; width: 80%; margin-left: auto; margin-right: auto; }
+             /* Adjust overlap container size */
+            .overlap-image-container { width: 55%; height: 150px; position: relative; margin: 0 auto 10px auto; top: auto; right: auto; /* Stack them */ }
+            .overlap-image-1 { z-index: 0; }
+            .overlap-image-2 { top: 0; }
+
+            .feature-detailed .container { flex-direction: column; width: 100%; padding: 0 15px; }
+            .feature-detailed-visual { flex-basis: 100%; order: -1; margin-bottom: 2rem; max-width: 400px; margin-left: auto; margin-right: auto; height: 300px; }
+            .feature-detailed-content { padding-left: 0; flex-basis: 100%; text-align: center; }
         }
 
         @media (max-width: 768px) {
-            .section { padding: 60px 0; }
-            h1 { font-size: 2.2rem; }
-            h2 { font-size: 1.8rem; }
-
-            .header .container {
-                 flex-direction: column;
-                 gap: 10px;
-            }
-            .main-nav ul {
-                 margin-top: 10px;
-                 justify-content: center; /* Center nav items */
-            }
-             .main-nav li {
-                margin-left: 15px;
-                margin-right: 15px; /* Add right margin for spacing */
-             }
-
-            .hero-container {
-                flex-direction: column;
-                text-align: center; /* Center text when stacked */
-            }
-            .hero-content {
-                 max-width: 100%;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr; /* Stack feature items */
-            }
-
-            .footer .container {
-                flex-direction: column;
-                text-align: center;
-                gap: 15px;
-            }
-            .footer-links ul {
-                justify-content: center;
-                 margin-top: 10px;
-            }
-             .footer-links li {
-                 margin-left: 10px;
-                 margin-right: 10px;
-             }
+             .section { padding: 50px 0; }
+             h1 { font-size: 2rem; } h2 { font-size: 1.6rem; } h3 { font-size: 1.3rem; }
+             .header .container { flex-direction: column; gap: 15px; }
+             .main-nav ul { justify-content: center; flex-wrap: wrap; gap: 10px 20px; margin-top: 0; }
+             .main-nav li { margin-left: 0; }
+             .header .btn-header { margin-top: 10px; }
+             .hero-image-container { height: 250px; } /* Adjust hero image height */
+             .feature-icon-container { height: 150px; } /* Adjust feature icon height */
+             .feature-detailed-visual { height: 250px; } /* Adjust detailed feature height */
         }
 
          @media (max-width: 576px) {
-              body { font-size: 15px; } /* Adjust base font size */
-              h1 { font-size: 2rem; }
-              h2 { font-size: 1.6rem; }
-              h3 { font-size: 1.4rem; }
-              .btn {
-                   padding: 10px 20px;
-                   font-size: 0.9rem;
-              }
-              .main-nav li {
-                    margin-left: 10px;
-                    margin-right: 10px;
-              }
+              body { font-size: 15px; }
+              h1 { font-size: 1.8rem; } h2 { font-size: 1.5rem; } h3 { font-size: 1.2rem; }
+              .btn { padding: 8px 18px; font-size: 0.9rem; }
+              .features-grid { grid-template-columns: 1fr; }
+              .value-prop-dark-visuals { height: auto; } /* Let height be determined by stacked images */
+              .overlap-image-container { height: 120px; width: 70%; } /* Adjust overlap size */
+              .feature-detailed-visual { height: 200px; } /* Adjust detailed feature height */
+              .footer-links ul { gap: 10px 15px; }
+              .circle-placeholder { width: 25px; height: 25px; margin: 0 5px; }
          }
 
     </style>
@@ -411,86 +271,168 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <a href="#" class="logo">Narnia</a>
+            <a href="#" class="logo">NARNIA</a>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="#hero">Home</a></li>
                     <li><a href="#features">Explore</a></li>
-                    <li><a href="#about">About</a></li> <!-- Added About Link -->
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#stories">The Books</a></li>
                 </ul>
             </nav>
+            <a href="#signup" class="btn btn-header">Enter Wardrobe</a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="container hero-container">
-            <div class="hero-content">
+    <main>
+
+        <!-- Hero Section (Section 1) -->
+        <section id="hero" class="hero-section section">
+            <div class="container">
                 <h1>Step Through the Wardrobe</h1>
-                <p>Discover a land beyond your wildest dreams. Adventure awaits in the magical world of Narnia.</p>
-                <a href="#features" class="btn btn-primary">Explore Now</a>
-                <a href="#about" class="btn btn-secondary" style="margin-left: 10px;">Learn More</a> <!-- Added secondary button -->
-            </div>
-            <div class="hero-visual">
-                <!-- IMPORTANT: Replace this placeholder with your actual Narnia-themed image -->
-                <img src="https://i.pinimg.com/736x/f9/62/e6/f962e6d13e5e8ff2f161b519731a56af.jpg" alt="Magical landscape of Narnia">
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="features-section section">
-        <div class="container text-center">
-            <h2>Discover the Wonders</h2>
-            <p>From talking animals to epic battles, Narnia is full of magic and mystery.</p>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-icon">🦁</div> <!-- Placeholder icon -->
-                    <h4>Meet Noble Creatures</h4>
-                    <p>Encounter brave talking beasts, mythical beings, and the great Lion, Aslan.</p>
+                <p class="subtitle">Discover a land of talking beasts, mythical creatures, and epic adventures beyond the back of the wardrobe.</p>
+                <a href="#features" class="btn btn-dark">Explore Narnia</a>
+                <!-- Replaced placeholder div with image container -->
+                <div class="hero-image-container">
+                    <img src="https://i.pinimg.com/736x/e2/2f/1c/e22f1c6eb19d45e4a51a569fa11b3687.jpg" alt="Castle Cair Paravel in Narnia" class="img-cover">
                 </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🏰</div> <!-- Placeholder icon -->
-                    <h4>Explore Iconic Locations</h4>
-                    <p>Visit Cair Paravel, traverse the Lantern Waste, and witness the Stone Table.</p>
+                <blockquote class="hero-quote">
+                    "Wrong will be right, when Aslan comes in sight, At the sound of his roar, sorrows will be no more..."
+                    <cite>The Prophecy</cite>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- Section 2 (Dark Background) -->
+        <section class="section section-dark">
+            <div class="container d-flex value-prop-dark gap-2">
+                <div class="value-prop-dark-content">
+                    <h2>Beyond the Spare Oom</h2>
+                    <p>Narnia awaits—a world sometimes frozen in eternal winter, sometimes bathed in golden sunlight, always filled with magic, danger, and the potential for great courage.</p>
+                    <ul>
+                         <li>Encounter Noble Talking Beasts</li>
+                         <li>Witness the Power of Deep Magic</li>
+                         <li>Embark on Heroic Quests</li>
+                    </ul>
                 </div>
-                <div class="feature-item">
-                    <div class="feature-icon">⚔️</div> <!-- Placeholder icon -->
-                    <h4>Embark on Epic Quests</h4>
-                    <p>Join the Pevensies and other heroes in their courageous adventures.</p>
+                <div class="value-prop-dark-visuals">
+                     <!-- Replaced placeholder divs with image containers -->
+                     <div class="overlap-image-container overlap-image-1">
+                          <img src="https://i.pinimg.com/736x/2a/af/51/2aaf519f23341959d6e440de59b5d34d.jpg" alt="The Lamppost in the snowy woods of Narnia" class="img-cover">
+                     </div>
+                     <div class="overlap-image-container overlap-image-2">
+                          <img src="https://i.pinimg.com/736x/9c/a6/fd/9ca6fd4e40ce92379d7b342eaba54ffc.jpg" alt="Aslan the Great Lion" class="img-cover">
+                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Testimonial Section -->
-    <section id="about" class="testimonial-section section"> <!-- Added ID for nav -->
-        <div class="container testimonial-content">
-            <p>"Once a king or queen in Narnia, always a king or queen in Narnia. It’s a place that stays with you forever."</p>
-            <cite>- Lucy Pevensie (via C.S. Lewis)</cite> <!-- More thematic quote -->
-        </div>
-    </section>
+        <!-- Section 3 (Features Grid) -->
+        <section id="features" class="features-section section">
+            <div class="container">
+                <h2 class="text-center">Discover the Wonders</h2>
+                <p class="subtitle text-center">From the familiar lamppost to the shores of the Eastern Sea, iconic places and grand adventures define this magical land.</p>
+                <div class="features-grid">
+                    <!-- Feature Item 1 -->
+                    <div class="feature-item">
+                         <!-- Replaced placeholder div with image container -->
+                         <div class="feature-icon-container">
+                              <img src="https://i.pinimg.com/736x/9c/a6/fd/9ca6fd4e40ce92379d7b342eaba54ffc.jpg" alt="Aslan representing Narnia's wonders" class="img-cover">
+                         </div>
+                         <div class="feature-item-content">
+                              <h4>The Lantern Waste</h4>
+                              <p>Where the adventure begins.</p>
+                         </div>
+                    </div>
+                    <!-- Feature Item 2 -->
+                     <div class="feature-item">
+                         <div class="feature-icon-container">
+                              <img src="https://i.pinimg.com/736x/9c/a6/fd/9ca6fd4e40ce92379d7b342eaba54ffc.jpg" alt="Aslan representing Narnia's wonders" class="img-cover">
+                         </div>
+                          <div class="feature-item-content">
+                              <h4>Aslan's Presence</h4>
+                              <p>Hope, sacrifice, and magic.</p>
+                         </div>
+                    </div>
+                     <!-- Feature Item 3 -->
+                     <div class="feature-item">
+                         <div class="feature-icon-container">
+                             <img src="https://i.pinimg.com/736x/9c/a6/fd/9ca6fd4e40ce92379d7b342eaba54ffc.jpg" alt="Aslan representing Narnia's wonders" class="img-cover">
+                         </div>
+                          <div class="feature-item-content">
+                              <h4>Cair Paravel</h4>
+                              <p>Castle of the Kings & Queens.</p>
+                         </div>
+                    </div>
+                     <!-- Feature Item 4 -->
+                     <div class="feature-item">
+                         <div class="feature-icon-container">
+                              <img src="https://i.pinimg.com/736x/9c/a6/fd/9ca6fd4e40ce92379d7b342eaba54ffc.jpg" alt="Aslan representing Narnia's wonders" class="img-cover">
+                         </div>
+                          <div class="feature-item-content">
+                              <h4>Great Battles</h4>
+                              <p>Courage against the darkness.</p>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-     <!-- Call to Action Section -->
-    <section id="contact" class="cta-section section section-bg"> <!-- Added ID for nav -->
-        <div class="container text-center">
-            <h2>Ready for Your Own Adventure?</h2>
-            <p>The wardrobe is open. Step inside and begin your journey today.</p>
-            <a href="#" class="btn btn-primary btn-lg">Join the Exploration</a> <!-- Larger button maybe? -->
-        </div>
-    </section>
+        <!-- Section 4 (Image Left, Text Right) -->
+        <section id="stories" class="section section-light feature-detailed d-flex gap-2">
+             <div class="container d-flex feature-detailed gap-2">
+                 <!-- Replaced placeholder div with image -->
+                 <div class="feature-detailed-visual">
+                      <img src="https://i.pinimg.com/736x/ee/83/3b/ee833bbf25ea1ece22794cee3c4f8013.jpg" alt="The Dawn Treader ship sailing on the sea" class="img-cover">
+                 </div>
+                 <div class="feature-detailed-content">
+                     <h3>The Voyage of the Dawn Treader</h3>
+                     <p>Join Caspian, Lucy, Edmund, and Eustace as they sail to the edge of the world, encountering dragons, sea serpents, and wonders beyond imagining to find the Lost Lords and reach Aslan's country.</p>
+                     <a href="#" class="btn btn-outline">Read the Story</a>
+                 </div>
+             </div>
+        </section>
 
+        <!-- Section 5 (Form) -->
+        <section id="signup" class="form-section section">
+            <div class="container">
+                 <h3>Join the Friends of Narnia</h3>
+                 <form action="#" class="signup-form">
+                      <div class="form-group">
+                           <input type="email" placeholder="Your Email Address" required>
+                      </div>
+                       <div class="form-group">
+                           <input type="text" placeholder="Your Name (Optional)">
+                      </div>
+                      <button type="submit" class="btn btn-dark">Subscribe for Updates</button>
+                 </form>
+            </div>
+        </section>
+
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>© 2025 Narnia Project. All rights reserved. Inspired by C.S. Lewis.</p>
-            <div class="footer-links">
+            <a href="#" class="logo">NARNIA</a>
+             <div class="footer-links">
                  <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">The Books</a></li>
+                    <li><a href="#">The Movies</a></li>
+                    <li><a href="#">C.S. Lewis</a></li>
+                    <li><a href="#">Characters</a></li>
+                    <li><a href="#">World Map</a></li>
+                    <li><a href="#">About Us</a></li>
                 </ul>
+            </div>
+            <div class="footer-social-placeholders">
+                 <span class="circle-placeholder"></span>
+                 <span class="circle-placeholder"></span>
+                 <span class="circle-placeholder"></span>
+                 <span class="circle-placeholder"></span>
+                 <span class="circle-placeholder"></span>
+            </div>
+            <div class="footer-copyright">
+                 <p>© 2025 Narnia Fan Project. Inspired by the works of C.S. Lewis. All rights reserved to respective copyright holders.</p>
             </div>
         </div>
     </footer>
